@@ -5,7 +5,8 @@ Summary: OpenShift Enterprise heat templates and DIB elements
 Group: System Environment/Base
 License: ASL 2.0
 URL: https://github.com/openshift/enterprise-heat-templates
-Source0: enterprise-heat-templates-%{version}.tar.gz
+Source0: openshift-heat-templates-%{version}.tar.gz
+BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildArch: noarch
 
