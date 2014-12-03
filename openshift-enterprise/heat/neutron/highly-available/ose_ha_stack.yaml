@@ -238,9 +238,9 @@ parameters:
   ose_version:
     description: The version of OpenShift Enterprise to install
     type: string
-    default: "2.0"
+    default: "2.2"
     constraints:
-    - allowed_values: ["1.2", "2.0"]
+    - allowed_values: ["2.0", "2.1", "2.2"]
 
 resources:
   ose_broker_sec_grp:
@@ -388,7 +388,6 @@ resources:
       key_name: { get_param: key_name }
       networks:
         - port: { get_resource: broker1_port }
-      security_groups: [{ get_resource: ose_broker_sec_grp }]
       user_data:
         str_replace:
           template: |
@@ -501,7 +500,6 @@ resources:
       key_name: { get_param: key_name }
       networks:
         - port: { get_resource: broker2_port }
-      security_groups: [{ get_resource: ose_broker_sec_grp }]
       user_data:
         str_replace:
           template: |
@@ -591,7 +589,6 @@ resources:
       key_name: { get_param: key_name }
       networks:
         - port: { get_resource: broker3_port }
-      security_groups: [{ get_resource: ose_broker_sec_grp }]
       user_data:
         str_replace:
           template: |
