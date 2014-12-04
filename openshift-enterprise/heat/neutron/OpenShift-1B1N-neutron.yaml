@@ -194,7 +194,7 @@ resources:
     type: OS::Nova::Server
     properties:
       name: broker_instance
-      image: RHEL65-x86_64-broker
+      image: RHEL6-x86_64-broker
       flavor: { get_param: broker_server_flavor }
       key_name: { get_param: key_name }
       networks:
@@ -281,7 +281,7 @@ resources:
     type: OS::Nova::Server
     properties:
       name: node_instance
-      image: RHEL65-x86_64-node
+      image: RHEL6-x86_64-node
       flavor: { get_param: node_server_flavor }
       key_name: { get_param: key_name }
       networks:

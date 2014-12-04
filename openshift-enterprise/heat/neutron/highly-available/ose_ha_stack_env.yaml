@@ -8,8 +8,8 @@ parameters:
   # this server will be a slave for the OpenShift zone
   upstream_dns_ip: 10.0.0.1
   # Name of glance images. Using prepped images will greatly reduce deploy time.
-  node_image: RHEL65-x86_64-node
-  broker_image: RHEL65-x86_64-broker
+  node_image: RHEL6-x86_64-node
+  broker_image: RHEL6-x86_64-broker
   activemq_admin_pass: password
   activemq_user_pass: password
   mcollective_pass: password
