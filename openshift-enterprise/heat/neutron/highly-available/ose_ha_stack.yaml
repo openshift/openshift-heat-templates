@@ -116,11 +116,11 @@ parameters:
   broker_image:
     description: Broker image name
     type: string
-    default: RHEL65-x86_64-broker
+    default: RHEL6-x86_64-broker
   node_image:
     description: Node image name
     type: string
-    default: RHEL65-x86_64-node
+    default: RHEL6-x86_64-node
   install_method:
     description: Installation method (yum rhsm rhn)
     type: string
