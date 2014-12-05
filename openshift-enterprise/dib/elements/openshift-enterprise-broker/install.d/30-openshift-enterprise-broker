@@ -76,4 +76,4 @@ else
 fi
 
 yum update -y
-install-packages $OSE_PACKAGES --skip-broken
+install-packages $OSE_PACKAGES

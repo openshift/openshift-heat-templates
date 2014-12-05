@@ -8,8 +8,7 @@ OpenShift Enteprise now requires that you use Red Hat Enterprise Linux 6.6, whic
 https://rhn.redhat.com/rhn/software/channel/downloads/Download.do?cid=16952
 
 To build with diskimage-builder, do the following in the parent directory of enterprise-heat-templates::
-
-  git clone https://github.com/openstack/diskimage-builder.git
+  yum install diskimage-builder
   mkdir $HOME/tmp
   export ELEMENTS_PATH=heat-templates/openshift-enterprise/dib/elements
   export DIB_CLOUD_IMAGES=url rhel-guest-image-6-6.5-20131220.3-1.qcow2 image can be found (download this from rhn)
