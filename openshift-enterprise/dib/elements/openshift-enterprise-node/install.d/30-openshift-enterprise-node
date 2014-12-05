@@ -52,14 +52,14 @@ else
       cat <<YUM > /etc/yum.repos.d/openshift.repo
 [openshift_jbosseap]
 name=OpenShift JBossEAP
-baseurl=${DIB_CONF_REPO_BASE}/RHOSE-JBOSSEAP-2.0/x86_64/os/
+baseurl=${DIB_CONF_REPO_BASE}/RHOSE-JBOSSEAP-${OSE_VERSION}/x86_64/os/
 enabled=1
 gpgcheck=1
 priority=10
 
 [openshift_node]
 name=OpenShift Node
-baseurl=${DIB_CONF_REPO_BASE}/RHOSE-NODE-2.0/x86_64/os/
+baseurl=${DIB_CONF_REPO_BASE}/RHOSE-NODE-${OSE_VERSION}/x86_64/os/
 enabled=1
 gpgcheck=1
 priority=10
@@ -81,7 +81,6 @@ fi
 # DIB_REG_TYPE of rhn or rhsm should be used if oo-admin-yum-validator is to be triggered
 if [ -n "${DIB_REG_TYPE}" ]; then
   yum install -y yum-plugin-priorities
-  # oo-admin-check-sources will ship with 2.0 however it is still compatible with OSE 1.2
   curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/master | tar -xvz
   pushd openshift-openshift-extras*/admin/yum-validator
     VALIDATOR_ARGS=" --role=node-eap --fix-all"
