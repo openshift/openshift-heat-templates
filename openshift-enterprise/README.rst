@@ -45,11 +45,11 @@ To build with diskimage-builder, do the following in the parent directory of ent
 
   export TMP_DIR=$HOME/tmp
   export DIB_IMAGE_SIZE=5
-  diskimage-builder/bin/disk-image-create --no-tmpfs -a amd64 vm rhel openshift-enterprise-broker -o RHEL6-x86_64-broker
+  disk-image-create --no-tmpfs -a amd64 vm rhel openshift-enterprise-broker -o RHEL6-x86_64-broker
 
   export TMP_DIR=$HOME/tmp
   export DIB_IMAGE_SIZE=20
-  diskimage-builder/bin/disk-image-create --no-tmpfs -a amd64 vm rhel openshift-enterprise-node -o RHEL6-x86_64-node
+  disk-image-create --no-tmpfs -a amd64 vm rhel openshift-enterprise-node -o RHEL6-x86_64-node
 
   # Register the RHEL6-x86_64-broker and RHEL6-x86_64-node with OpenStack Glance::
   glance add name=RHEL6-x86_64-broker is_public=true disk_format=qcow2 container_format=bare < RHEL6-x86_64-broker.qcow2
