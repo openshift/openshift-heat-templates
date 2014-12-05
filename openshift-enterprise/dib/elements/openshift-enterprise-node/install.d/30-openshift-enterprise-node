@@ -107,7 +107,7 @@ else
 fi
 
 yum update -y
-install-packages $OSE_PACKAGES --skip-broken
+install-packages $OSE_PACKAGES
 # make sure not services were started that might hold on to mounts
 service crond stop
 
