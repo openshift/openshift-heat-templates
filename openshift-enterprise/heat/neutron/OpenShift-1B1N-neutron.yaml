@@ -314,8 +314,7 @@ resources:
             export CONF_OSE_VERSION=P_OSE_VERSION
             export CONF_YUM_VALIDATOR_VERSION=P_YUM_VALIDATOR_VERSION
             export CONF_INSTALL_COMPONENTS=node
-            # oo-admin-check-sources will ship with 2.0 however it is still compatible with OSE 1.2
-            curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/enterprise-2.0 | tar -xvz
+            curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/enterprise-2.2 | tar -xvz
             pushd openshift-openshift-extras*/admin/yum-validator
               VALIDATOR_ARGS="--oo-version=${P_YUM_VALIDATOR_VERSION} --role=node-eap --fix-all"
               ./oo-admin-yum-validator ${VALIDATOR_ARGS} || ./oo-admin-yum-validator ${VALIDATOR_ARGS}
