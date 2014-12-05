@@ -132,7 +132,7 @@ parameters:
     type: string
     default: "2.2"
     constraints:
-      - allowed_values: ["2.0", "2.1", "2.0"]
+      - allowed_values: ["2.0", "2.1", "2.2"]
   yum_validator_version:
     description: An optional version for the oo-yum-validator tool to use
     type: string
