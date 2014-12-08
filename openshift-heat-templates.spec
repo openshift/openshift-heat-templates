@@ -1,5 +1,5 @@
 Name: openshift-heat-templates
-Version: 0.1.1.2
+Version: 0.1.1.3
 Release:       1%{?dist}
 Summary: OpenShift Enterprise heat templates and DIB elements
 Group: System Environment/Base
@@ -28,6 +28,20 @@ cp -aR openshift-enterprise %{buildroot}%{_datadir}/%{name}/openshift-enterprise
 %{_datadir}/%{name}
 
 %changelog
+* Mon Dec 08 2014 Chris Alfonso <calfonso@redhat.com> 0.1.1.3-1
+- BZ1167792 - rh_reg_pool should be a property of node1..3
+  (calfonso@redhat.com)
+- Fixed typo in allowed values (calfonso@redhat.com)
+- Update README references to installed diskimage-builder package
+  (calfonso@redhat.com)
+- Use diskimage-builder package. Removed --skip-broken (calfonso@redhat.com)
+- Updating hard coded OSE version to read environment variable.
+  (calfonso@redhat.com)
+- BZ1161777 - OpenShift Heat Templates don't demonstrate how to...
+  (calfonso@redhat.com)
+- BZ1164190 - networks/port should not be defined in yaml file
+  (calfonso@redhat.com)
+
 * Wed Oct 22 2014 Chris Alfonso <calfonso@redhat.com> 0.1.1.2-1
 - new package built with tito
 
