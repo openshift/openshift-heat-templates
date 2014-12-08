@@ -684,6 +684,7 @@ resources:
       install_method: { get_param: install_method }
       rh_reg_user: { get_param: rh_reg_user }
       rh_reg_pass: { get_param: rh_reg_pass }
+      rh_reg_pool: { get_param: rh_reg_pool }
       rh_reg_act_key: { get_param: rh_reg_act_key }
       rh_reg_opts: { get_param: rh_reg_opts }
       rhel_repo_base: { get_param: rhel_repo_base }
@@ -718,6 +719,7 @@ resources:
       install_method: { get_param: install_method }
       rh_reg_user: { get_param: rh_reg_user }
       rh_reg_pass: { get_param: rh_reg_pass }
+      rh_reg_pool: { get_param: rh_reg_pool }
       rh_reg_act_key: { get_param: rh_reg_act_key }
       rh_reg_opts: { get_param: rh_reg_opts }
       rhel_repo_base: { get_param: rhel_repo_base }
@@ -752,6 +754,7 @@ resources:
       install_method: { get_param: install_method }
       rh_reg_user: { get_param: rh_reg_user }
       rh_reg_pass: { get_param: rh_reg_pass }
+      rh_reg_pool: { get_param: rh_reg_pool }
       rh_reg_act_key: { get_param: rh_reg_act_key }
       rh_reg_opts: { get_param: rh_reg_opts }
       rhel_repo_base: { get_param: rhel_repo_base }
