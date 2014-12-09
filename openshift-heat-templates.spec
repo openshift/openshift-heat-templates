@@ -1,5 +1,5 @@
 Name: openshift-heat-templates
-Version: 0.1.1.3
+Version: 0.1.1.4
 Release:       1%{?dist}
 Summary: OpenShift Enterprise heat templates and DIB elements
 Group: System Environment/Base
@@ -28,6 +28,10 @@ cp -aR openshift-enterprise %{buildroot}%{_datadir}/%{name}/openshift-enterprise
 %{_datadir}/%{name}
 
 %changelog
+* Tue Dec 09 2014 Chris Alfonso <calfonso@redhat.com> 0.1.1.4-1
+- Resolves: rhbz#1172064 (calfonso@redhat.com)
+- Resolves: rhbz#1172060 (calfonso@redhat.com)
+
 * Mon Dec 08 2014 Chris Alfonso <calfonso@redhat.com> 0.1.1.3-1
 - BZ1167792 - rh_reg_pool should be a property of node1..3
   (calfonso@redhat.com)
