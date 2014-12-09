@@ -416,7 +416,6 @@ resources:
             export CONF_RHN_REG_OPTS=P_CONF_RHN_REG_OPTS
             export CONF_OSE_REPOS_BASE=P_CONF_OSE_REPOS_BASE
             export CONF_OSE_EXTRA_REPO_BASE=P_CONF_OSE_EXTRA_REPOS_BASE
-            export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
             export CONF_RHEL_REPO=P_CONF_RHEL_REPO
             export CONF_RHEL_OPTIONAL_REPO=P_CONF_RHEL_OPTIONAL_REPO
             export CONF_INSTALL_COMPONENTS=broker,activemq,datastore,named
@@ -473,7 +472,6 @@ resources:
             P_CONF_RHN_REG_OPTS: { get_param: rh_reg_opts}
             P_CONF_OSE_REPOS_BASE: { get_param: openshift_repo_base}
             P_CONF_OSE_EXTRA_REPOS_BASE: { get_param: openshift_extra_repo_base}
-            P_CONF_JBOSS_REPO_BASE: { get_param: jboss_repo_base}
             P_CONF_RHEL_REPO: { get_param: rhel_repo_base}
             P_CONF_RHEL_OPTIONAL_REPO: { get_param: rhel_opt_repo_base}
             P_OSE_VERSION: { get_param: ose_version }
@@ -520,7 +518,6 @@ resources:
             export CONF_RHN_REG_OPTS=P_CONF_RHN_REG_OPTS
             export CONF_OSE_REPOS_BASE=P_CONF_OSE_REPOS_BASE
             export CONF_OSE_EXTRA_REPO_BASE=P_CONF_OSE_EXTRA_REPOS_BASE
-            export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
             export CONF_RHEL_REPO=P_CONF_RHEL_REPO
             export CONF_RHEL_OPTIONAL_REPO=P_CONF_RHEL_OPTIONAL_REPO
             export CONF_INSTALL_COMPONENTS=broker,activemq,datastore
@@ -562,7 +559,6 @@ resources:
             P_CONF_RHN_REG_OPTS: { get_param: rh_reg_opts}
             P_CONF_OSE_REPOS_BASE: { get_param: openshift_repo_base}
             P_CONF_OSE_EXTRA_REPOS_BASE: { get_param: openshift_extra_repo_base}
-            P_CONF_JBOSS_REPO_BASE: { get_param: jboss_repo_base}
             P_CONF_RHEL_REPO: { get_param: rhel_repo_base}
             P_CONF_RHEL_OPTIONAL_REPO: { get_param: rhel_opt_repo_base}
             P_OSE_VERSION: { get_param: ose_version }
@@ -609,7 +605,6 @@ resources:
             export CONF_RHN_REG_OPTS=P_CONF_RHN_REG_OPTS
             export CONF_OSE_REPOS_BASE=P_CONF_OSE_REPOS_BASE
             export CONF_OSE_EXTRA_REPO_BASE=P_CONF_OSE_EXTRA_REPOS_BASE
-            export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
             export CONF_RHEL_REPO=P_CONF_RHEL_REPO
             export CONF_RHEL_OPTIONAL_REPO=P_CONF_RHEL_OPTIONAL_REPO
             export CONF_INSTALL_COMPONENTS=broker,activemq,datastore
@@ -651,7 +646,6 @@ resources:
             P_CONF_RHN_REG_OPTS: { get_param: rh_reg_opts}
             P_CONF_OSE_REPOS_BASE: { get_param: openshift_repo_base}
             P_CONF_OSE_EXTRA_REPOS_BASE: { get_param: openshift_extra_repo_base}
-            P_CONF_JBOSS_REPO_BASE: { get_param: jboss_repo_base}
             P_CONF_RHEL_REPO: { get_param: rhel_repo_base}
             P_CONF_RHEL_OPTIONAL_REPO: { get_param: rhel_opt_repo_base}
             P_OSE_VERSION: { get_param: ose_version }
