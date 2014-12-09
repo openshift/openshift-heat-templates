@@ -274,7 +274,12 @@ resources:
             export CONF_RHN_REG_OPTS=P_CONF_RHN_REG_OPTS
             export CONF_OSE_REPOS_BASE=P_CONF_OSE_REPOS_BASE
             export CONF_OSE_EXTRA_REPO_BASE=P_CONF_OSE_EXTRA_REPOS_BASE
-            export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
+            if [ -z "$P_CONF_JBOSS_REPO_BASE" ]
+            then
+               echo "CONF_JBOSS_REPO_BASE was not set so CONF_JBOSS_REPO_BASE will not be exported to the environment"
+            else
+               export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
+            fi
             export CONF_RHEL_REPO=P_CONF_RHEL_REPO
             export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO
             export CONF_RHEL_OPTIONAL_REPO=P_CONF_RHEL_OPTIONAL_REPO
