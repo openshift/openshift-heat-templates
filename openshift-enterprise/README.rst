@@ -51,6 +51,10 @@ To build with diskimage-builder, do the following in the parent directory of ent
   export DIB_IMAGE_SIZE=20
   disk-image-create --no-tmpfs -a amd64 vm rhel openshift-enterprise-node -o RHEL6-x86_64-node
 
+  # If you encounter an error regarding insufficient disk space during the disk-image-create process, you should increase your disk space allocation by increasing the value of DIB_IMAGE_SIZE. The error message that indicates insufficient space will be similar to "installing package $package_name needs xMB on the / filesystem."
+
+  # If you're not going to use disk-image-create to pre-install OpenShift Enterprise packages, make sure your image has enough diskspace to install the packages that the OpenShift Enterprise installer will need to install. Take a look here, http://docs.openstack.org/image-guide/content/ch_openstack_images.html.
+
   # Register the RHEL6-x86_64-broker and RHEL6-x86_64-node with OpenStack Glance::
   glance add name=RHEL6-x86_64-broker is_public=true disk_format=qcow2 container_format=bare < RHEL6-x86_64-broker.qcow2
   glance add name=RHEL6-x86_64-node is_public=true disk_format=qcow2 container_format=bare < RHEL6-x86_64-node.qcow2

@@ -203,32 +203,32 @@ resources:
         str_replace:
           template: |
             #!/bin/bash -x
-
-            export CONF_BROKER_IP_ADDR=P_BROKER_FLOATING_IP
-            export CONF_NODE_IP_ADDR=P_NODE_FLOATING_IP
-            export CONF_NAMED_IP_ADDR=P_BROKER_FLOATING_IP
-            export CONF_DOMAIN=P_PREFIX
-            export CONF_BROKER_HOSTNAME=P_BROKER_HOSTNAME
-            export CONF_NODE_HOSTNAME=P_NODE_HOSTNAME
-            export CONF_NAMED_HOSTNAME=P_BROKER_HOSTNAME
-            export CONF_ACTIVEMQ_HOSTNAME=P_BROKER_HOSTNAME
-            export CONF_DATASTORE_HOSTNAME=P_BROKER_HOSTNAME
-            export PREFIX=P_PREFIX
+            export CONF_ABORT_ON_UNRECOGNIZED_SETTINGS=false
+            test -z P_BROKER_FLOATING_IP || export CONF_BROKER_IP_ADDR=P_BROKER_FLOATING_IP
+            test -z P_NODE_FLOATING_IP || export CONF_NODE_IP_ADDR=P_NODE_FLOATING_IP
+            test -z P_BROKER_FLOATING_IP || export CONF_NAMED_IP_ADDR=P_BROKER_FLOATING_IP
+            test -z P_PREFIX || export CONF_DOMAIN=P_PREFIX
+            test -z P_BROKER_HOSTNAME || export CONF_BROKER_HOSTNAME=P_BROKER_HOSTNAME
+            test -z P_NODE_HOSTNAME || export CONF_NODE_HOSTNAME=P_NODE_HOSTNAME
+            test -z P_BROKER_HOSTNAME || export CONF_NAMED_HOSTNAME=P_BROKER_HOSTNAME
+            test -z P_BROKER_HOSTNAME || export CONF_ACTIVEMQ_HOSTNAME=P_BROKER_HOSTNAME
+            test -z P_BROKER_HOSTNAME || export CONF_DATASTORE_HOSTNAME=P_BROKER_HOSTNAME
+            test -z P_PREFIX || export PREFIX=P_PREFIX
             export DNS_SEC_KEY=`cat /var/named/K${PREFIX}.*.key  | awk '{print $8}'`
-            export CONF_INSTALL_METHOD=P_CONF_INSTALL_METHOD
-            export CONF_SM_REG_NAME=P_CONF_SM_REG_NAME
-            export CONF_SM_REG_PASS=P_CONF_SM_REG_PASS
-            export CONF_SM_REG_POOL=P_CONF_SM_REG_POOL
-            export CONF_RHN_REG_NAME=P_CONF_RHN_REG_NAME
-            export CONF_RHN_REG_PASS=P_CONF_RHN_REG_PASS
-            export CONF_RHN_REG_ACTKEY=P_CONF_RHN_REG_ACTKEY
-            export CONF_OSE_REPO_BASE=P_CONF_OSE_REPO_BASE
-            export CONF_RHEL_REPO=P_CONF_RHEL_REPO
-            export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO_BASE
-            export CONF_OSE_VERSION=P_OSE_VERSION
-            export CONF_YUM_VALIDATOR_VERSION=P_YUM_VALIDATOR_VERSION
-            export CONF_INSTALL_COMPONENTS=broker,named,datastore,activemq
-            curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/enterprise-2.2 | tar -xvz
+            test -z P_CONF_INSTALL_METHOD || export CONF_INSTALL_METHOD=P_CONF_INSTALL_METHOD
+            test -z P_CONF_SM_REG_NAME || export CONF_SM_REG_NAME=P_CONF_SM_REG_NAME
+            test -z P_CONF_SM_REG_PASS || export CONF_SM_REG_PASS=P_CONF_SM_REG_PASS
+            test -z P_CONF_SM_REG_POOL || export CONF_SM_REG_POOL=P_CONF_SM_REG_POOL
+            test -z P_CONF_RHN_REG_NAME || export CONF_RHN_REG_NAME=P_CONF_RHN_REG_NAME
+            test -z P_CONF_RHN_REG_PASS || export CONF_RHN_REG_PASS=P_CONF_RHN_REG_PASS
+            test -z P_CONF_RHN_REG_ACTKEY || export CONF_RHN_REG_ACTKEY=P_CONF_RHN_REG_ACTKEY
+            test -z P_CONF_OSE_REPO_BASE || export CONF_OSE_REPO_BASE=P_CONF_OSE_REPO_BASE
+            test -z P_CONF_RHEL_REPO || export CONF_RHEL_REPO=P_CONF_RHEL_REPO
+            test -z P_CONF_RHSCL_REPO_BASE || export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO_BASE
+            test -z P_OSE_VERSION || export CONF_OSE_VERSION=P_OSE_VERSION
+            test -z P_YUM_VALIDATOR_VERSION || export CONF_YUM_VALIDATOR_VERSION=P_YUM_VALIDATOR_VERSION
+            CONF_INSTALL_COMPONENTS=broker,named,datastore,activemq
+            curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/master | tar -xvz
             pushd openshift-openshift-extras*/admin/yum-validator
               VALIDATOR_ARGS="--oo-version=${CONF_OSE_VERSION} --role=broker --fix-all"
               ./oo-admin-yum-validator ${VALIDATOR_ARGS} || ./oo-admin-yum-validator ${VALIDATOR_ARGS}
@@ -288,36 +288,31 @@ resources:
         str_replace:
           template: |
             #!/bin/bash -x
-
-            export CONF_BROKER_IP_ADDR=P_BROKER_FLOATING_IP
-            export CONF_NODE_IP_ADDR=P_NODE_FLOATING_IP
-            export CONF_NAMED_IP_ADDR=P_BROKER_FLOATING_IP
-            export CONF_DOMAIN=P_PREFIX
-            export CONF_BROKER_HOSTNAME=P_BROKER_HOSTNAME
-            export CONF_NODE_HOSTNAME=P_NODE_HOSTNAME
-            export CONF_NAMED_HOSTNAME=P_BROKER_HOSTNAME
-            export CONF_ACTIVEMQ_HOSTNAME=P_BROKER_HOSTNAME
-            export CONF_DATASTORE_HOSTNAME=P_BROKER_HOSTNAME
-            export CONF_INSTALL_METHOD=P_CONF_INSTALL_METHOD
-            export CONF_SM_REG_NAME=P_CONF_SM_REG_NAME
-            export CONF_SM_REG_PASS=P_CONF_SM_REG_PASS
-            export CONF_SM_REG_POOL=P_CONF_SM_REG_POOL
-            export CONF_RHN_REG_NAME=P_CONF_RHN_REG_NAME
-            export CONF_RHN_REG_PASS=P_CONF_RHN_REG_PASS
-            export CONF_RHN_REG_ACTKEY=P_CONF_RHN_REG_ACTKEY
-            export CONF_OSE_REPO_BASE=P_CONF_OSE_REPO_BASE
-            if [ -z "$P_CONF_JBOSS_REPO_BASE" ]
-            then
-               echo "CONF_JBOSS_REPO_BASE was not set so CONF_JBOSS_REPO_BASE will not be exported to the environment"
-            else
-               export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
-            fi
-            export CONF_RHEL_REPO=P_CONF_RHEL_REPO
-            export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO_BASE
-            export CONF_OSE_VERSION=P_OSE_VERSION
-            export CONF_YUM_VALIDATOR_VERSION=P_YUM_VALIDATOR_VERSION
+            export CONF_ABORT_ON_UNRECOGNIZED_SETTINGS=false
+            test -z P_BROKER_FLOATING_IP || export CONF_BROKER_IP_ADDR=P_BROKER_FLOATING_IP
+            test -z P_NODE_FLOATING_IP || export CONF_NODE_IP_ADDR=P_NODE_FLOATING_IP
+            test -z P_BROKER_FLOATING_IP || export CONF_NAMED_IP_ADDR=P_BROKER_FLOATING_IP
+            test -z P_PREFIX || export CONF_DOMAIN=P_PREFIX
+            test -z P_BROKER_HOSTNAME || export CONF_BROKER_HOSTNAME=P_BROKER_HOSTNAME
+            test -z P_NODE_HOSTNAME || export CONF_NODE_HOSTNAME=P_NODE_HOSTNAME
+            test -z P_BROKER_HOSTNAME || export CONF_NAMED_HOSTNAME=P_BROKER_HOSTNAME
+            test -z P_BROKER_HOSTNAME || export CONF_ACTIVEMQ_HOSTNAME=P_BROKER_HOSTNAME
+            test -z P_BROKER_HOSTNAME || export CONF_DATASTORE_HOSTNAME=P_BROKER_HOSTNAME
+            test -z P_CONF_INSTALL_METHOD || export CONF_INSTALL_METHOD=P_CONF_INSTALL_METHOD
+            test -z P_CONF_SM_REG_NAME || export CONF_SM_REG_NAME=P_CONF_SM_REG_NAME
+            test -z P_CONF_SM_REG_PASS || export CONF_SM_REG_PASS=P_CONF_SM_REG_PASS
+            test -z P_CONF_SM_REG_POOL || export CONF_SM_REG_POOL=P_CONF_SM_REG_POOL
+            test -z P_CONF_RHN_REG_NAME || export CONF_RHN_REG_NAME=P_CONF_RHN_REG_NAME
+            test -z P_CONF_RHN_REG_PASS || export CONF_RHN_REG_PASS=P_CONF_RHN_REG_PASS
+            test -z P_CONF_RHN_REG_ACTKEY || export CONF_RHN_REG_ACTKEY=P_CONF_RHN_REG_ACTKEY
+            test -z P_CONF_OSE_REPO_BASE || export CONF_OSE_REPO_BASE=P_CONF_OSE_REPO_BASE
+            test -z P_CONF_JBOSS_REPO_BASE || export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
+            test -z P_CONF_RHEL_REPO || export CONF_RHEL_REPO=P_CONF_RHEL_REPO
+            test -z P_CONF_RHSCL_REPO_BASE || export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO_BASE
+            test -z P_OSE_VERSION || export CONF_OSE_VERSION=P_OSE_VERSION
+            test -z P_YUM_VALIDATOR_VERSION || export CONF_YUM_VALIDATOR_VERSION=P_YUM_VALIDATOR_VERSION
             export CONF_INSTALL_COMPONENTS=node
-            curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/enterprise-2.2 | tar -xvz
+            curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/master | tar -xvz
             pushd openshift-openshift-extras*/admin/yum-validator
               VALIDATOR_ARGS="--oo-version=${P_YUM_VALIDATOR_VERSION} --role=node-eap --fix-all"
               ./oo-admin-yum-validator ${VALIDATOR_ARGS} || ./oo-admin-yum-validator ${VALIDATOR_ARGS}

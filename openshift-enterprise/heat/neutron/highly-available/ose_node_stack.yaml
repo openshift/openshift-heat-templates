@@ -255,40 +255,35 @@ resources:
         str_replace:
           template: |
             #!/bin/bash -x
-
-            export CONF_BROKER_IP_ADDR=P_BROKER_FLOATING_IP
-            export CONF_NODE_IP_ADDR=P_NODE_FLOATING_IP
-            export CONF_DOMAIN=P_DOMAIN
-            export CONF_BROKER_HOSTNAME=P_LOAD_BAL_HOSTNAME
-            export CONF_NODE_HOSTNAME=P_NODE_HOSTNAME
-            export CONF_NAMED_HOSTNAME=P_NAMED_HOSTNAME
-            export CONF_NAMED_IP_ADDR=P_NAMED_IP
-            export CONF_DATASTORE_REPLICANTS=P_REPLICANTS
-            export CONF_ACTIVEMQ_REPLICANTS=P_REPLICANTS
-            export CONF_CARTRIDGES=P_CONF_CARTRIDGES
-            export CONF_INSTALL_METHOD=P_CONF_INSTALL_METHOD
-            export CONF_RHN_USER=P_CONF_RH_USER
-            export CONF_RHN_PASS=P_CONF_RH_PASS
-            export CONF_SM_REG_POOL=P_CONF_RH_REG_POOL
-            export CONF_RHN_REG_ACTKEY=P_CONF_RH_REG_ACTKEY
-            export CONF_RHN_REG_OPTS=P_CONF_RHN_REG_OPTS
-            export CONF_OSE_REPOS_BASE=P_CONF_OSE_REPOS_BASE
-            export CONF_OSE_EXTRA_REPO_BASE=P_CONF_OSE_EXTRA_REPOS_BASE
-            if [ -z "$P_CONF_JBOSS_REPO_BASE" ]
-            then
-               echo "CONF_JBOSS_REPO_BASE was not set so CONF_JBOSS_REPO_BASE will not be exported to the environment"
-            else
-               export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
-            fi
-            export CONF_RHEL_REPO=P_CONF_RHEL_REPO
-            export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO
-            export CONF_RHEL_OPTIONAL_REPO=P_CONF_RHEL_OPTIONAL_REPO
+            export CONF_ABORT_ON_UNRECOGNIZED_SETTINGS=false
+            test -z P_BROKER_FLOATING_IP || export CONF_BROKER_IP_ADDR=P_BROKER_FLOATING_IP
+            test -z P_NODE_FLOATING_IP || export CONF_NODE_IP_ADDR=P_NODE_FLOATING_IP
+            test -z P_DOMAIN || export CONF_DOMAIN=P_DOMAIN
+            test -z P_LOAD_BAL_HOSTNAME || export CONF_BROKER_HOSTNAME=P_LOAD_BAL_HOSTNAME
+            test -z P_NODE_HOSTNAME || export CONF_NODE_HOSTNAME=P_NODE_HOSTNAME
+            test -z P_NAMED_HOSTNAME || export CONF_NAMED_HOSTNAME=P_NAMED_HOSTNAME
+            test -z P_NAMED_IP || export CONF_NAMED_IP_ADDR=P_NAMED_IP
+            test -z P_REPLICANTS || export CONF_DATASTORE_REPLICANTS=P_REPLICANTS
+            test -z P_REPLICANTS || export CONF_ACTIVEMQ_REPLICANTS=P_REPLICANTS
+            test -z P_CONF_CARTRIDGES || export CONF_CARTRIDGES=P_CONF_CARTRIDGES
+            test -z P_CONF_INSTALL_METHOD || export CONF_INSTALL_METHOD=P_CONF_INSTALL_METHOD
+            test -z P_CONF_RH_USER || export CONF_RHN_USER=P_CONF_RH_USER
+            test -z P_CONF_RH_PASS || export CONF_RHN_PASS=P_CONF_RH_PASS
+            test -z P_CONF_RH_REG_POOL || export CONF_SM_REG_POOL=P_CONF_RH_REG_POOL
+            test -z P_CONF_RH_REG_ACTKEY || export CONF_RHN_REG_ACTKEY=P_CONF_RH_REG_ACTKEY
+            test -z P_CONF_RHN_REG_OPTS || export CONF_RHN_REG_OPTS=P_CONF_RHN_REG_OPTS
+            test -z P_CONF_OSE_REPOS_BASE || export CONF_OSE_REPOS_BASE=P_CONF_OSE_REPOS_BASE
+            test -z P_CONF_OSE_EXTRA_REPOS_BASE || export CONF_OSE_EXTRA_REPO_BASE=P_CONF_OSE_EXTRA_REPOS_BASE
+            test -z P_CONF_JBOSS_REPO_BASE || export CONF_JBOSS_REPO_BASE=P_CONF_JBOSS_REPO_BASE
+            test -z P_CONF_RHEL_REPO || export CONF_RHEL_REPO=P_CONF_RHEL_REPO
+            test -z P_CONF_RHSCL_REPO || export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO
+            test -z P_CONF_RHEL_OPTIONAL_REPO || export CONF_RHEL_OPTIONAL_REPO=P_CONF_RHEL_OPTIONAL_REPO
             export CONF_INSTALL_COMPONENTS=node
             export CONF_ACTIONS=do_all_actions
-            export CONF_MCOLLECTIVE_USER=P_CONF_MCOLLECTIVE_USER
-            export CONF_MCOLLECTIVE_PASSWORD=P_CONF_MCOLLECTIVE_PASSWORD
-            export CONF_ACTIVEMQ_ADMIN_PASSWORD=P_CONF_ACTIVEMQ_ADMIN_PASSWORD
-            export CONF_ACTIVEMQ_AMQ_USER_PASSWORD=P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD
+            test -z P_CONF_MCOLLECTIVE_USER || export CONF_MCOLLECTIVE_USER=P_CONF_MCOLLECTIVE_USER
+            test -z P_CONF_MCOLLECTIVE_PASSWORD || export CONF_MCOLLECTIVE_PASSWORD=P_CONF_MCOLLECTIVE_PASSWORD
+            test -z P_CONF_ACTIVEMQ_ADMIN_PASSWORD || export CONF_ACTIVEMQ_ADMIN_PASSWORD=P_CONF_ACTIVEMQ_ADMIN_PASSWORD
+            test -z P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD || export CONF_ACTIVEMQ_AMQ_USER_PASSWORD=P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD
 
             # configure OSE
             curl -O https://raw.githubusercontent.com/openshift/openshift-extras/enterprise-P_OSE_VERSION/enterprise/install-scripts/generic/openshift.sh -k
