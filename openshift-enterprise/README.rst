@@ -64,7 +64,11 @@ Invoke Heat
 
 Once you have the required disk images registered with glance, you can use OpenStack Heat to provision instances of your images and configure them to work together as an OpenShift infrastructure::
 
-heat stack-create openshift --template-file=./enterprise-heat-templates/openshift-enterprise/heat/neutron/OpenShift-1B1N-neutron.yaml --parameters="key_name=${USER}_key;prefix=novalocal;BrokerHostname=openshift.brokerinstance.novalocal;NodeHostname=openshift.nodeinstance.novalocal;ConfInstallMethod=rhsm;ConfSMRegName=username;ConfSMRegPass=password;ConfSMRegPool=OSE_pool_id;private_net_id=neturon_private_net_id;public_net_id=neutron_public_net_id;private_subnet_id=neutron_private_subnet_id;yum_validator_version=2.2;ose_version=2.2"
+As an example, if you've installed the openshift-heat-templates rpm and you would like to use the OpenShift-1B1N-neutron.yaml template, you can run:
+
+heat stack-create openshift --template-file=/usr/share/openshift-heat-templates/openshift-enterprise/heat/neutron/OpenShift-1B1N-neutron.yaml --parameters="key_name=${USER}_key;prefix=novalocal;broker_hostname=openshift.brokerinstance.novalocal;node_hostname=openshift.nodeinstance.novalocal;conf_install_method=rhsm;conf_sm_reg_name=username;conf_sm_reg_pass;conf_sm_reg_pool=OSE_pool_id;private_net_id=neturon_private_net_id;public_net_id=neutron_public_net_id;private_subnet_id=neutron_private_subnet_id;;yum_validator_version=2.2;ose_version=2.2"
+
+If you're running the above from source, and you've cloned the openshift-heat-template git repo, just change the path to the OpenShift-1B1N-neutron.yaml accordingly.
 
 Using Custom Yum repos
 ----------------------
