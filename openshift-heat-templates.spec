@@ -1,5 +1,5 @@
 Name: openshift-heat-templates
-Version: 0.1.1.5
+Version: 0.1.1.6
 Release:       1%{?dist}
 Summary: OpenShift Enterprise heat templates and DIB elements
 Group: System Environment/Base
@@ -28,6 +28,9 @@ cp -aR openshift-enterprise %{buildroot}%{_datadir}/%{name}/openshift-enterprise
 %{_datadir}/%{name}
 
 %changelog
+* Tue Dec 16 2014 Chris Alfonso <calfonso@redhat.com> 0.1.1.6-1
+- Resolves: rhbz#1161774 (calfonso@redhat.com)
+
 * Wed Dec 10 2014 Chris Alfonso <calfonso@redhat.com> 0.1.1.5-1
 - Resolves: rhbz#1172513, rhbz#1172563, rhbz#1172704 , rhbz#1172717
   (calfonso@redhat.com)
