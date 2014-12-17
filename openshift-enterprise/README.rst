@@ -75,19 +75,19 @@ Using Custom Yum repos
 
 By default, the Heat Orchestration Template assumes you're using the Yum installation method, which means it also expects you to pass parameters to heat for yum repositories. As an example, you can add the following to your list of parameters::
 
-  ConfRHELRepoBase=http://example.com/rhel/server/6/6Server/x86_64/os;ConfJBossRepoBase=http://example.com/rhel/server/6/6Server/x86_64;ConfRepoBase=http://example.com/OpenShiftEnterprise/1.2/latest
+  conf_rhel_repo_base=http://example.com/rhel/server/6/6Server/x86_64/os;conf_jboss_repo_base=http://example.com/rhel/server/6/6Server/x86_64;conf_ose_repo_base=http://example.com/OpenShiftEnterprise/1.2/latest
 
 Using Subscription Manager
 --------------------------
 
-You can switch from the default installation method by passing in the parameter ConfInstallMethod, as demonstrated above. The allowed values, other than yum are rhsm and rhn. If you set the installation method to rhsm, you'll want to also pass in the following parameters ConfSMRegName and ConfSMRegPass for the username and password respectively. Additionally, you'll need to set the ConfSMRegPool parameter with the value of the subscription pool id that corresponds to your OpenShift Enterprise subscription. When setting the ConfInstallMethod to something other than yum it is not necessary to pass the Conf*RepoBase parameters::
+You can switch from the default installation method by passing in the parameter conf_install_method, as demonstrated above. The allowed values, other than yum are rhsm and rhn. If you set the installation method to rhsm, you'll want to also pass in the following parameters conf_reg_sm_reg_name and conf_sm_reg_pass for the username and password respectively. Additionally, you'll need to set the conf_sm_reg_pool parameter with the value of the subscription pool id that corresponds to your OpenShift Enterprise subscription. When setting the conf_install_method to something other than yum it is not necessary to pass the conf_*_repo_base parameters::
 
-  ConfInstallMethod=rhsm;ConfSMRegName=myuser;ConfSMRegPass=mypass;ConfSMRegPool=XYZ01234567
+  conf_install_method=rhsm;conf_sm_reg_name=myuser;cohnf_sm_reg_pass=mypass;conf_sm_reg_pool=XYZ01234567
 
 Using RHN
 ---------
 
-You can switch from the default installation method by passing in the parameter ConfInstallMethod. The allowed values, other than yum are rhsm and rhn. If you set the installation method to rhn, you'll want to also pass in the following parameters ConfRHNRegName and ConfRHNRegPass for the username and password respectively. Additionally, you'll need to set the ConfRHNRegAK parameter with the value of the subscription activation key that corresponds to your OpenShift Enterprise subscription. The rhn installation method only works with RHN Satellite. When setting the ConfInstallMethod to something other than yum it is not necessary to pass the Conf*RepoBase parameters::
+You can switch from the default installation method by passing in the parameter conf_install_method. The allowed values, other than yum are rhsm and rhn. If you set the installation method to rhn, you'll want to also pass in the following parameters conf_rhn_reg_name and conf_rhn_reg_pass for the username and password respectively. Additionally, you'll need to set the conf_rhn_reg_ak parameter with the value of the subscription activation key that corresponds to your OpenShift Enterprise subscription. The rhn installation method only works with RHN Satellite. When setting the conf_install_method to something other than yum it is not necessary to pass the conf_*_repo_base parameters::
 
-  ConfInstallMethod=rhn;ConfRHNRegName=myuser;ConfRHNRegPass=mypass;ConfRHNRegAK=activationkey
+  conf_install_method=rhn;conf_rhn_reg_name=myuser;conf_rhn_reg_pass=mypass;conf_rhn_reg_ak=activationkey
 
