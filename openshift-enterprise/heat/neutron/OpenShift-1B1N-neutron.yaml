@@ -127,6 +127,12 @@ parameters:
   private_subnet_id:
     type: string
     description: ID of private sub network into which servers get deployed
+  no_scramble:
+    description: Override passwords with scrambled strings or use defaults
+    type: string
+    default: "false"
+    constraints:
+      - allowed_values: ["true", "false"]
   ose_version:
     description: The version of OpenShift Enterprise to install
     type: string
@@ -227,6 +233,7 @@ resources:
             test -z P_CONF_RHSCL_REPO_BASE || export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO_BASE
             test -z P_OSE_VERSION || export CONF_OSE_VERSION=P_OSE_VERSION
             test -z P_YUM_VALIDATOR_VERSION || export CONF_YUM_VALIDATOR_VERSION=P_YUM_VALIDATOR_VERSION
+            test -z P_CONF_NO_SCRAMBLE || export CONF_NO_SCRAMBLE=P_CONF_NO_SCRAMBLE
             CONF_INSTALL_COMPONENTS=broker,named,datastore,activemq
             curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/master | tar -xvz
             pushd openshift-openshift-extras*/admin/yum-validator
@@ -263,6 +270,7 @@ resources:
             P_OSE_VERSION: { get_param: ose_version }
             P_YUM_VALIDATOR_VERSION: { get_param: yum_validator_version }
             P_BROKER_WAIT_HANDLE: { get_resource: broker_wait_handle }
+            P_CONF_NO_SCRAMBLE: { get_param: no_scramble }
 
   node_wait_handle:
     type: AWS::CloudFormation::WaitConditionHandle
@@ -311,6 +319,7 @@ resources:
             test -z P_CONF_RHSCL_REPO_BASE || export CONF_RHSCL_REPO_BASE=P_CONF_RHSCL_REPO_BASE
             test -z P_OSE_VERSION || export CONF_OSE_VERSION=P_OSE_VERSION
             test -z P_YUM_VALIDATOR_VERSION || export CONF_YUM_VALIDATOR_VERSION=P_YUM_VALIDATOR_VERSION
+            test -z P_CONF_NO_SCRAMBLE || export CONF_NO_SCRAMBLE=P_CONF_NO_SCRAMBLE
             export CONF_INSTALL_COMPONENTS=node
             curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/master | tar -xvz
             pushd openshift-openshift-extras*/admin/yum-validator
@@ -346,6 +355,7 @@ resources:
             P_OSE_VERSION: { get_param: ose_version }
             P_YUM_VALIDATOR_VERSION: { get_param: yum_validator_version }
             P_NODE_WAIT_HANDLE: { get_resource: node_wait_handle }
+            P_CONF_NO_SCRAMBLE: { get_param: no_scramble }
 
 outputs:
   OpenShiftConsole:

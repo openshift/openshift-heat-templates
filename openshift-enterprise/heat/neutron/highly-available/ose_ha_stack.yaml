@@ -53,6 +53,8 @@ parameter_groups:
   - mcollective_pass
   - activemq_admin_pass
   - activemq_user_pass
+  - mongo_key
+  - no_scramble
 parameters:
   key_name:
     description: Name of an existing keypair to enable SSH access to the instances
@@ -219,6 +221,10 @@ parameters:
     description: MongoDB broker password
     type: string
     hidden: true
+  mongo_key:
+    description: MongDB replication key
+    type: string
+    hidden: true
   mcollective_user:
     description: MCollective username
     type: string
@@ -235,6 +241,12 @@ parameters:
     description: ActiveMQ user password
     type: string
     hidden: true
+  no_scramble:
+    description: Override passwords with scrambled strings or use defaults
+    type: string
+    default: "false"
+    constraints:
+      - allowed_values: ["true", "false"]
   ose_version:
     description: The version of OpenShift Enterprise to install
     type: string
@@ -432,6 +444,8 @@ resources:
             test -z P_CONF_MCOLLECTIVE_PASSWORD || export CONF_MCOLLECTIVE_PASSWORD=P_CONF_MCOLLECTIVE_PASSWORD
             test -z P_CONF_ACTIVEMQ_ADMIN_PASSWORD || export CONF_ACTIVEMQ_ADMIN_PASSWORD=P_CONF_ACTIVEMQ_ADMIN_PASSWORD
             test -z P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD || export CONF_ACTIVEMQ_AMQ_USER_PASSWORD=P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD
+            test -z P_CONF_MONGODB_KEY || export CONF_MONGODB_KEY=P_CONF_MONGODB_KEY
+            test -z P_CONF_NO_SCRAMBLE || export CONF_NO_SCRAMBLE=P_CONF_NO_SCRAMBLE
 
             curl -O https://raw.githubusercontent.com/openshift/openshift-extras/enterprise-P_OSE_VERSION/enterprise/install-scripts/generic/openshift.sh -k
             chmod +x ./openshift.sh
@@ -483,10 +497,12 @@ resources:
             P_CONF_OPENSHIFT_PASSWORD1: { get_param: openshift_pass1 }
             P_CONF_MONGODB_BROKER_USER: { get_param: mongo_broker_user }
             P_CONF_MONGODB_BROKER_PASSWORD: { get_param: mongo_broker_pass }
+            P_CONF_MONGODB_KEY: { get_param: mongo_key }
             P_CONF_MCOLLECTIVE_USER: { get_param: mcollective_user }
             P_CONF_MCOLLECTIVE_PASSWORD: { get_param: mcollective_pass }
             P_CONF_ACTIVEMQ_ADMIN_PASSWORD: { get_param: activemq_admin_pass }
             P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD: { get_param: activemq_user_pass }
+            P_CONF_NO_SCRAMBLE: { get_param: no_scramble }
             P_BROKER_WAIT_HANDLE: { get_resource: broker1_wait_handle }
 
 ###
@@ -534,6 +550,8 @@ resources:
             test -z P_CONF_MCOLLECTIVE_PASSWORD || export CONF_MCOLLECTIVE_PASSWORD=P_CONF_MCOLLECTIVE_PASSWORD
             test -z P_CONF_MCOLLECTIVE_PASSWORD || export CONF_ACTIVEMQ_ADMIN_PASSWORD=P_CONF_ACTIVEMQ_ADMIN_PASSWORD
             test -z P_CONF_MCOLLECTIVE_PASSWORD || export CONF_ACTIVEMQ_AMQ_USER_PASSWORD=P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD
+            test -z P_CONF_MONGODB_KEY || export CONF_MONGODB_KEY=P_CONF_MONGODB_KEY
+            test -z P_CONF_NO_SCRAMBLE || export CONF_NO_SCRAMBLE=P_CONF_NO_SCRAMBLE
 
             curl -O https://raw.githubusercontent.com/openshift/openshift-extras/enterprise-P_OSE_VERSION/enterprise/install-scripts/generic/openshift.sh -k
             chmod +x ./openshift.sh
@@ -572,10 +590,11 @@ resources:
             P_CONF_MONGODB_BROKER_PASSWORD: { get_param: mongo_broker_pass }
             P_CONF_MCOLLECTIVE_USER: { get_param: mcollective_user }
             P_CONF_MCOLLECTIVE_PASSWORD: { get_param: mcollective_pass }
+            P_CONF_MONGODB_KEY: { get_param: mongo_key }
             P_CONF_ACTIVEMQ_ADMIN_PASSWORD: { get_param: activemq_admin_pass }
             P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD: { get_param: activemq_user_pass }
             P_BROKER_WAIT_HANDLE: { get_resource: broker_wait_handle}
-
+            P_CONF_NO_SCRAMBLE: { get_param: no_scramble }
 ###
 # Broker3
 ###
@@ -621,6 +640,8 @@ resources:
             test -z P_CONF_MCOLLECTIVE_PASSWORD || export CONF_MCOLLECTIVE_PASSWORD=P_CONF_MCOLLECTIVE_PASSWORD
             test -z P_CONF_ACTIVEMQ_ADMIN_PASSWORD || export CONF_ACTIVEMQ_ADMIN_PASSWORD=P_CONF_ACTIVEMQ_ADMIN_PASSWORD
             test -z P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD || export CONF_ACTIVEMQ_AMQ_USER_PASSWORD=P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD
+            test -z P_CONF_MONGODB_KEY || export CONF_MONGODB_KEY=P_CONF_MONGODB_KEY
+            test -z P_CONF_NO_SCRAMBLE || export CONF_NO_SCRAMBLE=P_CONF_NO_SCRAMBLE
 
             curl -O https://raw.githubusercontent.com/openshift/openshift-extras/enterprise-P_OSE_VERSION/enterprise/install-scripts/generic/openshift.sh -k
             chmod +x ./openshift.sh
@@ -657,12 +678,13 @@ resources:
             P_CONF_OPENSHIFT_PASSWORD1: { get_param: openshift_pass1 }
             P_CONF_MONGODB_BROKER_USER: { get_param: mongo_broker_user }
             P_CONF_MONGODB_BROKER_PASSWORD: { get_param: mongo_broker_pass }
+            P_CONF_MONGODB_KEY: { get_param: mongo_key }
             P_CONF_MCOLLECTIVE_USER: { get_param: mcollective_user }
             P_CONF_MCOLLECTIVE_PASSWORD: { get_param: mcollective_pass }
             P_CONF_ACTIVEMQ_ADMIN_PASSWORD: { get_param: activemq_admin_pass }
             P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD: { get_param: activemq_user_pass }
             P_BROKER_WAIT_HANDLE: { get_resource: broker_wait_handle}
-
+            P_CONF_NO_SCRAMBLE: { get_param: no_scramble }
 ###
 # Node
 ###
@@ -700,7 +722,7 @@ resources:
       activemq_user_pass: { get_param: activemq_user_pass }
       avail_zone: { get_param: primary_avail_zone }
       node_server_flavor: { get_param: node_server_flavor }
-
+      no_scramble: { get_param: no_scramble }
   node2_instance:
     type: OpenShift::Node::Server
     properties:
@@ -735,7 +757,7 @@ resources:
       activemq_user_pass: { get_param: activemq_user_pass }
       avail_zone: { get_param: secondary_avail_zone }
       node_server_flavor: { get_param: node_server_flavor }
-
+      no_scramble: { get_param: no_scramble }
   node3_instance:
     type: OpenShift::Node::Server
     properties:
@@ -770,7 +792,7 @@ resources:
       activemq_user_pass: { get_param: activemq_user_pass }
       avail_zone: { get_param: secondary_avail_zone }
       node_server_flavor: { get_param: node_server_flavor }
-
+      no_scramble: { get_param: no_scramble }
 outputs:
   console_url:
     description: OpenShift Enterprise console URL

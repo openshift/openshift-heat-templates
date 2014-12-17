@@ -13,6 +13,7 @@ parameters:
   mcollective_pass: password
   mongo_broker_pass: password
   openshift_pass1: password
+  no_scramble: false
   # Red Hat registration credentials
   rh_reg_name: admin
   rh_reg_pass: password

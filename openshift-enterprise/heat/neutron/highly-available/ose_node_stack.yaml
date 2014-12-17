@@ -43,6 +43,7 @@ parameter_groups:
   - mcollective_pass
   - activemq_admin_pass
   - activemq_user_pass
+  - no_scramble
 parameters:
   key_name:
     description: Name of an existing keypair to enable SSH access to the instances
@@ -183,12 +184,18 @@ parameters:
     description: ActiveMQ user password
     type: string
     hidden: true
+  no_scramble:
+    description: Override passwords with scrambled strings or use defaults
+    type: string
+    default: "false"
+    constraints:
+      - allowed_values: ["true", "false"]
   ose_version:
     description: The version of OpenShift Enterprise to install
     type: string
     default: "2.2"
     constraints:
-    - allowed_values: ["2.0", "2.1", "2.2"]
+      - allowed_values: ["2.0", "2.1", "2.2"]
 
 resources:
   ose_node_sec_grp:
@@ -284,6 +291,7 @@ resources:
             test -z P_CONF_MCOLLECTIVE_PASSWORD || export CONF_MCOLLECTIVE_PASSWORD=P_CONF_MCOLLECTIVE_PASSWORD
             test -z P_CONF_ACTIVEMQ_ADMIN_PASSWORD || export CONF_ACTIVEMQ_ADMIN_PASSWORD=P_CONF_ACTIVEMQ_ADMIN_PASSWORD
             test -z P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD || export CONF_ACTIVEMQ_AMQ_USER_PASSWORD=P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD
+            test -z P_CONF_NO_SCRAMBLE || export CONF_NO_SCRAMBLE=P_CONF_NO_SCRAMBLE
 
             # configure OSE
             curl -O https://raw.githubusercontent.com/openshift/openshift-extras/enterprise-P_OSE_VERSION/enterprise/install-scripts/generic/openshift.sh -k
@@ -349,6 +357,7 @@ resources:
             P_CONF_MCOLLECTIVE_PASSWORD: { get_param: mcollective_pass }
             P_CONF_ACTIVEMQ_ADMIN_PASSWORD: { get_param: activemq_admin_pass }
             P_CONF_ACTIVEMQ_AMQ_USER_PASSWORD: { get_param: activemq_user_pass }
+            P_CONF_NO_SCRAMBLE: { get_param: no_scramble }
 
 outputs:
   node_floating_ip:
