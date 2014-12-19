@@ -234,7 +234,7 @@ resources:
             test -z P_OSE_VERSION || export CONF_OSE_VERSION=P_OSE_VERSION
             test -z P_YUM_VALIDATOR_VERSION || export CONF_YUM_VALIDATOR_VERSION=P_YUM_VALIDATOR_VERSION
             test -z P_CONF_NO_SCRAMBLE || export CONF_NO_SCRAMBLE=P_CONF_NO_SCRAMBLE
-            CONF_INSTALL_COMPONENTS=broker,named,datastore,activemq
+            export CONF_INSTALL_COMPONENTS=broker,named,datastore,activemq
             curl -L https://api.github.com/repos/openshift/openshift-extras/tarball/master | tar -xvz
             pushd openshift-openshift-extras*/admin/yum-validator
               VALIDATOR_ARGS="--oo-version=${CONF_OSE_VERSION} --role=broker --fix-all"
