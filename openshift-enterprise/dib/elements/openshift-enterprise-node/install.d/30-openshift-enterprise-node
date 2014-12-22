@@ -91,7 +91,7 @@ if [ -n "${DIB_REG_TYPE}" ]; then
   popd
   rm -rf openshift-openshift-extras*
 fi
-OSE_PACKAGES="yum-plugin-priorities rubygem-openshift-origin-node ruby193-rubygem-passenger-native openshift-origin-node-util policycoreutils-python openshift-origin-cartridge-cron openshift-origin-cartridge-diy openshift-origin-cartridge-haproxy openshift-origin-cartridge-jbossews openshift-origin-cartridge-jbosseap openshift-origin-cartridge-jenkins openshift-origin-cartridge-jenkins-client openshift-origin-cartridge-mysql openshift-origin-cartridge-nodejs openshift-origin-cartridge-perl openshift-origin-cartridge-php openshift-origin-cartridge-postgresql openshift-origin-cartridge-python openshift-origin-cartridge-ruby openshift-origin-msg-node-mcollective wget ruby193-mcollective rubygem-openshift-origin-container-selinux rubygem-openshift-origin-frontend-nodejs-websocket python "
+OSE_PACKAGES="yum-plugin-priorities rubygem-openshift-origin-node ruby193-rubygem-passenger-native openshift-origin-node-util policycoreutils-python openshift-origin-cartridge-cron openshift-origin-cartridge-diy openshift-origin-cartridge-haproxy openshift-origin-cartridge-jbossews openshift-origin-cartridge-jbosseap openshift-origin-cartridge-jenkins openshift-origin-cartridge-jenkins-client openshift-origin-cartridge-mysql openshift-origin-cartridge-nodejs openshift-origin-cartridge-perl openshift-origin-cartridge-php openshift-origin-cartridge-postgresql openshift-origin-cartridge-python openshift-origin-cartridge-ruby openshift-origin-msg-node-mcollective ruby193-mcollective rubygem-openshift-origin-container-selinux rubygem-openshift-origin-frontend-nodejs-websocket python "
 
 if [ -n "${DIB_CONF_RHEL_REPO_BASE}" ]; then
   OSE_PACKAGES+="--disablerepo=rhel-6-server-rpms "
